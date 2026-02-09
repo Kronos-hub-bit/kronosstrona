@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kronos - Transport, Kontenery, Maszyny</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1b836d; /* Firmowa zieleń z logo */
+            --dark-color: #2e2d2c;    /* Ciemny grafit z logo */
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+        }
+        section {
+    padding: 5rem 10%;
+    scroll-margin-top: 80px; /* Wysokość twojego nagłówka + mały odstęp */
+}
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--white);
+        }
+
+        /* --- NAWIGACJA --- */
+        header {
+            background: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo img {
+            height: 100px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        /* --- HERO --- */
+        .hero {
+            background: linear-gradient(rgba(46, 45, 44, 0.7), rgba(46, 45, 44, 0.7)), url('https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 { font-size: 3.5rem; letter-spacing: 2px; }
+        .hero p { font-size: 1.2rem; margin: 15px 0 30px; max-width: 600px; }
+
+        /* --- SEKCJE OGÓLNE --- */
+        section { padding: 5rem 10%; }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--dark-color);
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            width: 50px;
+            height: 4px;
+            background: var(--primary-color);
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* --- HISTORIA --- */
+        .history { background: var(--white); }
+        .history-text {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        /* --- OFERTA --- */
+        .offer { background: var(--light-bg); }
+        .offer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .offer-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 5px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border-bottom: 4px solid transparent;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .offer-card:hover {
+            transform: translateY(-10px);
+            border-bottom: 4px solid var(--primary-color);
+        }
+
+        .offer-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            text-transform: uppercase;
+        }
+        /* --- SZCZEGÓŁY OFERTY (ZIG-ZAG) --- */
+/* --- SZCZEGÓŁY OFERTY (ZIG-ZAG) --- */
+.details-section {
+    background-color: var(--white);
+    padding: 5rem 10%;
+}
+
+.detail-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 80px; /* Odstęp między blokami */
+    gap: 50px;
+}
+
+/* Usuwamy margines z ostatniego elementu, żeby nie było dziury na dole */
+.detail-row:last-child {
+    margin-bottom: 0;
+}
+
+/* Klasa odwracająca kolejność dla parzystych elementów */
+.detail-row.reverse {
+    flex-direction: row-reverse;
+}
+
+.detail-content {
+    flex: 1; /* Zajmuje połowę miejsca */
+}
+
+.detail-content h3 {
+    font-size: 1.8rem;
+    color: var(--dark-color);
+    margin-bottom: 20px;
+    position: relative;
+    padding-left: 15px;
+    border-left: 4px solid var(--primary-color); /* Zielony pasek przy tytule */
+}
+
+.detail-content p {
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+}
+
+.detail-list {
+    list-style: none;
+}
+
+.detail-list li {
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: var(--dark-color);
+}
+
+.detail-list li i {
+    color: var(--primary-color); /* Zielony "ptaszek" */
+    margin-right: 10px;
+}
+
+.detail-image {
+    flex: 1; /* Zajmuje drugą połowę miejsca */
+    position: relative;
+}
+
+.detail-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* Cień pod zdjęciem */
+    transition: transform 0.3s ease;
+}
+
+.detail-image img:hover {
+    transform: scale(1.02); /* Lekkie powiększenie po najechaniu */
+}
+
+/* --- RESPONSYWNOŚĆ DLA SZCZEGÓŁÓW --- */
+@media (max-width: 900px) {
+    .detail-row, .detail-row.reverse {
+        flex-direction: column; /* Na tablecie/telefonie jeden pod drugim */
+        gap: 30px;
+        margin-bottom: 60px;
+    }
+
+    .detail-image img {
+        width: 100%; /* Zdjęcie na całą szerokość */
+    }
+}
+
+/* --- RESPONSYWNOŚĆ DLA SZCZEGÓŁÓW --- */
+@media (max-width: 900px) {
+    .detail-row, .detail-row.reverse {
+        flex-direction: column; /* Na tablecie/telefonie jeden pod drugim */
+        gap: 30px;
+        margin-bottom: 60px;
+    }
+
+    .detail-image img {
+        width: 100%; /* Zdjęcie na całą szerokość */
+    }
+}
+
+        /* --- GALERIA --- */
+        .gallery { background: var(--white); }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-item {
+            height: 250px;
+            overflow: hidden;
+            border-radius: 4px;
+            background: #eee;
+        }
+
+        .gallery-item img {
+       width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+    
+
+        /* --- STOPKA (NOWA SEKCJA SOCIAL MEDIA) --- */
+        footer {
+            background: var(--dark-color);
+            color: #ccc;
+            padding: 4rem 10% 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            text-align: center;
+        }
+
+        .footer-box {
+            margin: 20px;
+            min-width: 250px;
+        }
+
+        .footer-box h3 {
+            color: var(--white);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+        }
+
+        .footer-box p {
+            margin-bottom: 10px;
+        }
+
+        /* Styl ikon społecznościowych */
+        .social-icons {
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            color: var(--white);
+            font-size: 1.8rem;
+            margin: 0 15px;
+            transition: color 0.3s, transform 0.3s;
+            display: inline-block;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .footer-line {
+            border-top: 1px solid #444;
+            padding-top: 20px;
+            font-size: 0.85rem;
+        }
+
+        /* Mobilność */
+        @media (max-width: 768px) {
+            header { flex-direction: column; padding: 1rem; }
+            nav ul { margin-top: 20px; }
+            nav ul li { margin: 0 10px; }
+            .footer-content { flex-direction: column; }
+        }
+        .modal {
+    display: none; /* Domyślnie ukryty */
+    position: fixed; /* Zawsze w tym samym miejscu na ekranie */
+    z-index: 2000; /* Musi być "nad" wszystkim innym (nagłówek ma 1000) */
+    padding-top: 60px; /* Odstęp od góry */
+    left: 0;
+    top: 0;
+    width: 100%; /* Pełna szerokość */
+    height: 100%; /* Pełna wysokość */
+    overflow: auto; /* Włącz przewijanie, jeśli zdjęcie jest za duże */
+    background-color: rgba(0, 0, 0, 0.9); /* Czarne tło z 90% kryciem */
+}
+
+/* Styl powiększonego obrazka */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%; /* Domyślna szerokość */
+    max-width: 1000px; /* Maksymalna szerokość na dużych ekranach */
+    max-height: 85vh; /* Maksymalna wysokość (85% widoku ekranu) */
+    object-fit: contain; /* Zachowaj proporcje zdjęcia */
+    border-radius: 5px;
+    animation-name: zoom; /* Dodajemy animację powiększania */
+    animation-duration: 0.5s;
+}
+
+/* Przycisk zamykania (X) */
+.close {
+    position: absolute;
+    top: 25px;
+    right: 45px;
+    color: #f1f1f1;
+    font-size: 50px;
+    font-weight: bold;
+    transition: 0.3s;
+    z-index: 2001;
+}
+
+.close:hover,
+.close:focus {
+    color: var(--primary-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Dodatkowa animacja "zoom" dla płynnego efektu */
+@keyframes zoom {
+    from {transform:scale(0.1); opacity: 0;}
+    to {transform:scale(1); opacity: 1;}
+}
+
+/* Responsywność modala na telefonach */
+@media (max-width: 700px){
+    .modal-content {
+        width: 95%; /* Szersze zdjęcie na małym ekranie */
+        padding-top: 30px;
+    }
+    .close {
+        top: 10px;
+        right: 20px;
+        font-size: 35px;
+    }
+}
+
+/* Kursor rączki na małych zdjęciach w galerii, żeby user wiedział że można klikać */
+.gallery-item img {
+    cursor: pointer;
+}
+.machine-specs h4 {
+    color: var(--primary-color);
+    margin: 15px 0 10px 0;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+}
+
+.machine-specs h4 i {
+    margin-right: 10px;
+}
+
+.machine-specs .detail-list li {
+    background: #f1f1f1;
+    padding: 8px 15px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    border-left: 3px solid var(--primary-color);
+}
+
+.machine-specs strong {
+    color: var(--dark-color);
+}
+/* Nowoczesny tytuł i podtytuł */
+.modern-title {
+    font-size: 2.5rem;
+    color: var(--dark-color);
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+.subtitle {
+    color: #777;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    max-width: 500px;
+}
+
+/* Siatka transportowa */
+.transport-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.t-box {
+    padding: 20px;
+    background: #fdfdfd;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.t-box:hover {
+    background: var(--white);
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.t-number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: rgba(27, 131, 109, 0.1); /* Bardzo jasna zieleń */
+    position: absolute;
+    top: 5px;
+    right: 15px;
+}
+
+.t-box h4 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.t-box p {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.4;
+    margin-bottom: 0;
+}
+
+/* Nowoczesna ramka zdjęcia */
+.modern-frame {
+    position: relative;
+    padding: 10px;
+}
+
+.modern-frame::before {
+    content: '';
+    position: absolute; 
+    top: 10px;
+    right: 0;
+    width: 70%;
+    height: 70%;
+    border-top: 8px solid var(--primary-color);
+    border-right: 8px solid var(--primary-color);
+    z-index: -1;
+    border-radius: 0 20px 0 0;
+}
+
+.image-stats {
+    position: relative ;
+    top: 30px;
+    left: -20px;
+    background: var(--dark-color);
+    color: white;
+    padding: 0px 25px;
+    border-radius: 8px;
+    display: flex;
+    gap: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.image-stats span {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.image-stats strong {
+    color: var(--primary-color);
+    display: block;
+    font-size: 1.2rem;
+}
+
+/* Responsywność */
+@media (max-width: 600px) {
+    .transport-grid { grid-template-columns: 1fr; }
+    .image-stats {
+        position: static;
+        margin-top: 20px;
+        left: 0;
+    }
+}
+/* Układ katalogowy dla kontenerów */
+.container-catalog {
+    margin-bottom: 30px;
+}
+
+.catalog-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    transition: all 0.3s ease;
+}
+
+.catalog-item:last-child {
+    border-bottom: none;
+}
+
+.catalog-item:hover {
+    padding-left: 10px;
+}
+
+.catalog-icon {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    width: 50px;
+    text-align: center;
+}
+
+.catalog-text h4 {
+    color: var(--dark-color);
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+.catalog-text p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0;
+}
+
+/* Podświetlony boks z obietnicą marki */
+.highlight-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: var(--light-bg);
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 5px solid var(--primary-color);
+    margin-top: 20px;
+}
+
+.highlight-box i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.highlight-box span {
+    font-size: 0.95rem;
+    color: var(--dark-color);
+}
+.social-icons a.olx-icon:hover {
+    color: #23e5db; /* Kolor zbliżony do marki OLX */
+    transform: translateY(-5px);
+}
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <img src="WhatsApp Image 2026-02-08 at 17.17.42.jpeg" alt="Kronos Logo">
+    </div>
+    <nav>
+        <ul>
+            <li><a href="#">Start</a></li>
+            <li><a href="#historia">O nas</a></li>
+            <li><a href="#oferta">Oferta</a></li>
+            <li><a href="#galeria">Galeria</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>KRONOS</h1>
+    <p>Solidny transport, wynajem maszyn budowlanych i kontenerów.</p>
+</section>
+
+<section id="historia" class="history">
+    <div class="section-title">
+        <h2>O nas</h2>
+    </div>
+    <div class="history-text">
+        <p>KRONOS S.C. to nowoczesna firma świadcząca usługi w zakresie specjalistycznego transportu ciężarowego oraz wynajmu maszyn budowlanych i kontenerów. </p>
+        
+    </div>
+</section>
+
+<section id="oferta" class="offer">
+    <div class="section-title">
+        <h2>Nasza Oferta</h2>
+    </div>
+    <div class="offer-grid">
+        <a href="#opis-transport" style="text-decoration: none; color: inherit;">
+        <div class="offer-card">
+            <i class="fas fa-truck" style="font-size: 2rem; color: #1b836d; margin-bottom: 15px;"></i>
+            <h3>Transport</h3>
+            <p>Profesjonalny, specjalistyczny transport ciężarowy. Usługi HDS. Bezpiecznie i zawsze na czas.
+
+            </p>
+        </div>
+        </a>
+        <a href="#opis-maszyny" style="text-decoration: none; color: inherit;">
+        <div class="offer-card">
+            <i class="fas fa-hard-hat" style="font-size: 2rem; color: #1b836d; margin-bottom: 15px;"></i>
+            <h3>Wynajem maszyn budowlanych</h3>
+            <p>Wynajem ładowarek teleskopowych i przegubowych dla budownictwa, przemysłu oraz rolnictwa. Usługi minikoparką.</p>
+        </div>
+        </a>
+        <a href="#opis-kontenery" style="text-decoration: none; color: inherit;">
+        <div class="offer-card">
+            <i class="fas fa-box-open" style="font-size: 2rem; color: #1b836d; margin-bottom: 15px;"></i>
+            <h3>Wynajem kontenerów</h3>
+            <p>Wynajem kontenerów biurowych, socjalnych oraz magazynowych
+
+
+            </p>
+        </div>
+        </a>
+    </div>
+</section>
+<section id="szczegoly" class="details-section">
+<div id="opis-transport" class="detail-row">
+    <div class="detail-content">
+        <h2 class="modern-title">Logistyka bez kompromisów</h2>
+        <p class="subtitle">W KRONOS przewozimy ładunki, gwarantujemy, że Twój towar dotrze bezpiecznie, niezależnie od skali wyzwania.</p>
+        
+        <div class="transport-grid">
+            <div class="t-box">
+                <span class="t-number">01</span>
+                <h4>HDS i Specjalistyczne</h4>
+                <p>Specjalistyczny transport ciężarowy z załadunkiem i rozładunkiem przy użyciu żurawii HDS i wind załadowczych.</p>
+            </div>
+            <div class="t-box">
+                <span class="t-number">02</span>
+                <h4>Maszyny i Gabaryty</h4>
+                <p>Profesjonalny przewóz maszyn rolniczych, budowlanych oraz kontenerów, przyczepami i naczepami niskopodwoziowymi.</p>
+            </div>
+            <div class="t-box">
+                <span class="t-number">03</span>
+                <h4>Bezpieczeństwo OCP</h4>
+                <p>Pełne ubezpieczenie przewoźnika i stały monitoring GPS. Twój ładunek jest chroniony od momentu załadunku po sam cel.</p>
+            </div>
+            <div class="t-box">
+                <span class="t-number">04</span>
+                <h4>Spedycja</h4>
+                <p>Oferujemy kompleksową obsługę spedycyjną. Nasze doświadczenie w logistyce pozwala zoptymalizować koszty transportu Twojej firmy, dbając o każdy etap trasy.</p>
+            </div>
+        </div>
+    </div>
+    <div class="detail-image modern-frame">
+        <img src="WhatsApp Image 2026-02-08 at 21.03.33 (1).jpeg" alt="Transport ciężarowy Kronos">
+        <div class="image-stats">
+            <span><strong>100%</strong> Terminowość</span>
+            <span><strong>24/7</strong> Wsparcie</span>
+        </div>
+    </div>
+</div>
+    
+    <div id="opis-maszyny" class="detail-row reverse">
+    <div class="detail-content">
+        <h3>Wynajem Ładowarek</h3>
+        <p>Oferujemy sprzęt sprawdzonych marek, który łączy potężną moc z niezwykłą precyzją. Nasze ładowarki są idealne na budowę, dla przemysłu i do prac w rolnictwie.</p>
+        
+        <div class="machine-specs">
+            <h4><i class="fas fa-shuttle-van"></i> Ładowarki Przegubowe</h4>
+            <ul class="detail-list">
+                <li><strong>KOMATSU WA-70:</strong> udźwig 2500kg, waga 5100kg (szufla + widły)</li>
+                <li><strong>KOMATSU WA-80:</strong> udźwig 2500kg, waga 5600kg (łyżka krokodyl + widły)</li>
+            </ul>
+
+            <h4><i class="fas fa-arrow-up"></i> Ładowarki Teleskopowe</h4>
+            <ul class="detail-list">
+                <li><strong>TEREX 2506:</strong> udźwig 2500kg, waga 4400kg, wys. 6m (szufla + widły)</li>
+                <li><strong>GENIE 2506:</strong> udźwig 2500kg, waga 4400kg, wys. 6m (szufla + widły)</li>
+                <li><strong>Manitou 1135:</strong> udźwig 3500kg, wys. 12m, 3 tryby pracy (szufla, widły, kosz)</li>
+                <li><strong>Manitou 741:</strong> udźwig 4000kg, wys. 12m, 3 tryby pracy (szufla, widły, kosz)</li>
+                
+            </ul>
+        </div>
+
+        
+    </div>
+    <div class="detail-image">
+        <img src="WhatsApp Image 2026-02-08 at 21.01.13.jpeg" alt="Prace ziemne koparką">
+    </div>
+</div>
+     
+<div id="opis-kontenery" class="detail-row">
+    <div class="detail-content">
+        <h2 class="modern-title">Kontenery na każdą potrzebę</h2>
+        <p class="subtitle">Zapewniamy kompleksowe zaplecze dla Twojej budowy lub firmy. Od profesjonalnych biur mobilnych po solidne kontenery magazynowe – podstawiamy tam, gdzie nas potrzebujesz.</p>
+        
+     
+
+            <div class="catalog-item">
+                <div class="catalog-icon"><i class="fas fa-laptop-house"></i></div>
+                <div class="catalog-text">
+                    <h4>Kontenery biurowe i socjalne</h4>
+                    <p>W pełni wyposażone jednostki idealne jako biura budowy, szatnie pracownicze lub zaplecze sanitarne.</p>
+                </div>
+            </div>
+
+            <div class="catalog-item">
+                <div class="catalog-icon"><i class="fas fa-warehouse"></i></div>
+                <div class="catalog-text">
+                    <h4>Kontenery magazynowe</h4>
+                    <p>Bezpieczne miejsce do przechowywania narzędzi i cennych materiałów na terenie Twojej inwestycji.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-image modern-frame">
+        <img src="WhatsApp Image 2026-02-08 at 20.53.54.jpeg" alt="Wynajem kontenerów Kronos">
+        </div>
+    </div>
+  
+</div>
+</section>
+
+
+<section id="galeria" class="gallery">
+    <div class="section-title">
+        <h2>Galeria </h2>
+    </div>
+    <div class="gallery-grid">
+        <div class="gallery-item"><img src="503548799_122219973128177903_6766246438391930188_n.jpg" alt="Zdjecie 1"></div>
+        <div class="gallery-item"><img src="473378580_122193759944177903_1032131880362149981_n.jpg" alt="Zdjecie 2"></div>
+        <div class="gallery-item"><img src="3a004ec5-b7b2-450c-a5c5-50aa8c168e15.JPG" alt="Zdjecie 3"></div>
+        <div class="gallery-item"><img src="7faf69dd-9aa6-4836-9aab-3c728d6bf527.JPG" alt="Zdjecie 4"></div>
+    </div>
+</section>
+
+<footer id="kontakt">
+    <div class="footer-content">
+        <div class="footer-box">
+            <h3>Kontakt</h3>
+            <p><i class="fas fa-phone"></i> +48 503 573 775 </p>
+            <p><i class="fas fa-envelope"></i> biuro@kronossc.pl</p>
+            <p><i class="fas fa-map-marker-alt"></i> ul. Kościelna 16, 86-140 Drzycim</p>
+            <p>NIP 5592050507</p>
+        </div>
+
+        <div class="footer-box">
+            <h3>Znajdź nas</h3>
+            <p>Śledź nasze realizacje na bieżąco:</p>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/p/Kronos-SC-61555337113211" target="_blank" title="Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://www.olx.pl/oferty/uzytkownik/DiqpV/" target="_blank" title="OLX - Nasze ogłoszenia" class="olx-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                </a>
+                <a href="https://www.google.com/maps/place/Kościelna+16,+86-140+Drzycim/@53.5218355,18.3097032,17z/data=!4m6!3m5!1s0x4702e5decb6cd799:0xf46cfba37495d2ba!8m2!3d53.5218355!4d18.3114865!16s%2Fg%2F11t2_n9glr?entry=ttu&g_ep=EgoyMDI2MDIwMy4wIKXMDSoKLDEwMDc5MjA2OUgBUAM%3D" target="_blank" title="Google Maps">
+                    <i class="fas fa-map-marked-alt"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-line">
+        &copy; 2026 Kronos S.C. Wszelkie prawa zastrzeżone.
+    </div>
+</footer>
+<div id="imageModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="expandedImg">
+</div>
+<script>
+    // Pobieramy elementy z HTML
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("expandedImg");
+    const closeBtn = document.getElementsByClassName("close")[0];
+
+    // Pobieramy wszystkie obrazki z sekcji galerii
+    const galleryImages = document.querySelectorAll('.gallery-item img');
+
+    // Dla każdego obrazka w galerii dodajemy "nasłuchiwacz" kliknięcia
+    galleryImages.forEach(img => {
+        img.addEventListener('click', function() {
+            modal.style.display = "block"; // Pokaż modal
+            modalImg.src = this.src; // Ustaw źródło dużego zdjęcia na to samo co klikniętego małego
+        });
+    });
+
+    // Funkcja zamykająca modal
+    function closeModal() {
+        modal.style.display = "none";
+    }
+
+    // Kliknięcie w 'X' zamyka modal
+    closeBtn.addEventListener('click', closeModal);
+
+    // Kliknięcie gdziekolwiek w ciemne tło (poza zdjęciem) też zamyka modal
+    window.addEventListener('click', function(event) {
+        if (event.target == modal) {
+            closeModal();
+        }
+    });
+
+    // (Opcjonalnie) Zamykanie klawiszem ESC
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "Escape" && modal.style.display === "block") {
+            closeModal();
+        }
+    });
+</script>
+</body>
+</html>
